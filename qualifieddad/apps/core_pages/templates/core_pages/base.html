@@ -1,0 +1,92 @@
+{% load staticfiles %}
+{% load static %}
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Qualified Dad</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome SOLID only CDN -->
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> -->
+
+
+    <!-- Custom styles for this template -->
+    <link href='{% static "css/main.css" %}' rel="stylesheet">
+    <link href='{% static "css/animate.css" %}' rel="stylesheet">
+
+    {% block css %}
+    {% endblock %}
+  </head>
+
+  <body>
+
+    {% block topspacer %}
+    {% if request.path != '/' %}
+    <div class="container d-none d-md-block" style="height:80px">
+    </div>
+    {% endif %}
+    {% endblock %}
+
+    {% block nav %}
+    <div class="d-none d-md-block">
+    {% include 'core_pages/navbar.html' %}
+    </div>
+    {% endblock %}
+
+    {% block tabs %}
+    <div class="d-block d-md-none">
+    {% include 'core_pages/navbar_home_mob.html' %}
+    </div>
+    {% endblock %}
+
+    {% block staging %}
+    {% endblock %}
+
+    <main role="main">
+      {% block content %}
+      {% endblock %}
+      {% block two %}
+      {% endblock %}
+
+    </main>
+    {% block footer %}
+    {% include 'core_pages/footer.html' %}
+    {% endblock %}
+
+    {% block spacer %}
+    <div class="row d-block d-md-none p-0 m-0" style="height:60px">
+    </div>
+    {% endblock %}
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+      <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+      <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
+      <!-- WOW -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+                    <script>
+                    new WOW().init();
+                    </script>
+                    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+    <script type="text/javascript" src='{% static "js/main.js" %}'></script>
+    <!-- Font Awesome with JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
+
+    {% block script %}
+    {% endblock %}
+  </body>
+</html>

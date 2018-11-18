@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<nav id="navbar-mobile" class="navbar navbar-dark navbar-expand-md fixed-top">
+  <a class="navbar-brand" href="{% url 'core_pages:home' %}">
+  <img src='{% static "img/logo-qualified-dad-fill-star-white-20-150.png" %}' width="60" height="60" class="d-inline-block align-top" alt="">
+  </a>
+  <a class="navbar-brand" href="{% url 'core_pages:home' %}">Qualified Dad</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav ml-3">
+    {% url 'core_pages:home' as home %}
+    {% url 'core_pages:about_us' as about_us %}
+      <li class="nav-item {% if request.path == home %}active{% endif %}">
+        <a class="nav-link" href="{% url 'core_pages:home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'core_pages:home' %}">Store</a>
+      </li>
+      <li class="nav-item {% if request.path == about_us %}active{% endif %}">
+        <a class="nav-link" href="{% url 'core_pages:about_us' %}">About Us</a>
+      </li>
+      <li class="nav-item dropdown mr-3">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user"></i> Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% if not request.user.is_authenticated %}
+          <a class="dropdown-item" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i> <small>Login</small></a>
+          <a class="dropdown-item" href="{% url 'account_signup' %}"><i class="fas fa-user-plus"></i> <small>Signup</small></a>
+        {% else %}
+          <a class="dropdown-item" href="{% url 'user_account:profile' %}"><i class="fas fa-user"></i> <small>Account</small></a>
+          <a class="dropdown-item" href="{% url 'user_account:user_address' %}"><i class="fas fa-user"></i> <small>Addresses</small></a>
+
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'account_logout' %}"><i class="fas fa-user-times"></i> <small>Logout</small></a>
+        {% endif %}
+          </div>
+      </li>
+    </ul>
+  </div>
+</nav>

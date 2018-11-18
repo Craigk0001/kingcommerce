@@ -1,0 +1,81 @@
+<form method="post">
+{% csrf_token %}
+{{ form.non_field_errors }}
+  <div class="row my-2">
+    <div class="col bg-light text-center mx-1">
+      <div class="input-group p-2" id="locationField">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-home"></i></div>
+        </div>
+        <input type="text" class="form-control" id="autocomplete" placeholder="Start typing address..." onFocus="geolocate()" autocomplete="address-level4">
+      </div>
+    </div>{# end col #}
+  </div>{# end row #}
+  <div class="row my-2">
+    <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 pb-2">
+            {{ form.company_name.errors }}
+            {{ form.company_name }}
+          </div>
+          <div class="col-md-8 pb-2">
+            {{ form.address_line1.errors }}
+            {{ form.address_line1 }}
+          </div>
+        </div>{# end row #}
+        <div class="row">
+          <div class="col-md-6 pb-2">
+            {{ form.city.errors }}
+            {{ form.city }}
+          </div>
+          <div class="col-md-6 pb-2">
+            {{ form.state.errors }}
+            {{ form.state }}
+          </div>
+        </div>{# end row #}
+        <div class="row">
+          <div class="col-md-8 pb-2">
+            {{ form.country.errors }}
+            {{ form.country }}
+          </div>
+          <div class="col-md-4 pb-2">
+            {{ form.postcode.errors }}
+            {{ form.postcode }}
+          </div>
+        </div>{# end row #}
+        {{ form.user.errors }}
+        <div>
+          <fieldset>{{ form.user }}</fieldset> <!-- .as_hidden -->
+        </div>
+        <div class="row">
+          <div class="col-md pb-2">
+            <p><b>Full name</b></p>
+            {{ form.full_name }}
+          </div>
+          <div class="col-md pb-2">
+            <p><b>Phone number</b></p>
+            {{ form.phone }}
+            <p><small>May be used to assist delivery</small></p>
+          </div>
+        </div>{# end row #}
+        <div class="row">
+          <div class="col">
+            <h5>Add delivery instructions</h5>
+          </div>
+        </div>{# end row #}
+        <div class="row">
+          <div class="col pb-2">
+            <p><b>Do we need additional instructions to find this address?</b></p>
+            {{ form.additional_instructions }}
+          </div>
+        </div>{# end row #}
+        <div class="row">
+          <div class="col pb-2">
+            <p><b>Do we need a security code or a call box number to access this building?</b></p>
+            {{ form.call_box }}
+          </div>
+        </div>{# end row #}
+      <button type="submit" name="button" class="btn btn-primary btn-block">Submit</button>
+    </div>{# end card-body #}
+  </div>{# end row #}
+</form>{# end form #}

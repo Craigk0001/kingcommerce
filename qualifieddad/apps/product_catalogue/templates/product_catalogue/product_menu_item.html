@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<div class="col-12 col-md-4 col-lg-3 text-center product px-0" id="product">
+  {% if product_post.product_images.all %}
+  {% for image in product_post.product_images.all %}
+  {% if forloop.first %}
+  <img class="img-fluid d-flex" src={{ image.image.url }} style="height:200; position:relative;">
+  {% endif %}
+  {% endfor %}
+  {% else %}
+  <img class="img-fluid" src='{% static "img/dads-beer-belt-1.jpg" %}' style="height:200; position:relative;">
+  {% endif %}
+  {% if product_post.sale_price_range.min %}
+  <span class="fa-layers fa-fw fa-3x" style="position:absolute; left: 88%; top: 10%; transform: translate( -50%, -50% );">
+    <i class="fas fa-certificate" style="color:tomato"></i>
+    <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5 rotate-30" style="font-weight:700; line-height:0.9">{{ product_post.max_discount|floatformat:"0" }}% OFF</span>
+  </span>
+  <h5>{{ product_post.title }}</h5>
+  <p>
+    <small>
+      <b>
+        {% if product_post.sale_price_range.min != product_post.sale_price_range.max %}
+        ${{ product_post.sale_price_range.min|floatformat:"2" }} - ${{ product_post.sale_price_range.max|floatformat:"2" }}
+        {% else %}
+        ${{ product_post.sale_price_range.min|floatformat:"2" }}
+        {% endif %}
+      </b>
+      <br>
+      <strike style="color:#00000050">
+        {% if product_post.regular_price_range.min != product_post.regular_price_range.max %}
+        ${{ product_post.regular_price_range.min|floatformat:"2" }} - ${{ product_post.regular_price_range.max|floatformat:"2" }}
+        {% else %}
+        ${{ product_post.regular_price_range.min|floatformat:"2" }}
+        {% endif %}
+      </strike>
+    </small>
+  </p>
+  {% elif product_post.regular_price_range.min != product_post.regular_price_range.max %}
+  <h5>{{ product_post.title }}</h5>
+  <p><small><b>${{ product_post.regular_price_range.min|floatformat:"2" }} - ${{ product_post.regular_price_range.max|floatformat:"2" }}</b></small></p>
+  {% else %}
+  <h5>{{ product_post.title }}</h5>
+  <p><small><b>${{ product_post.regular_price_range.min|floatformat:"2" }}</b></small></p>
+  {% endif %}
+  <a href="{% url 'product_catalogue:product' pk=product_post.pk %}"></a>
+</div>

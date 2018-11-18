@@ -1,0 +1,41 @@
+{% extends "core_pages/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div id="login-security" class="container">
+  <div class="row mt-5 mb-3">
+    <div class="col">
+      <a href="{% url 'user_account:profile' %}">Your account</a> | <a href="{% url 'user_account:security' %}">Login & security</a> | Change name
+    </div>
+  </div>
+  <div class="row ml-2">
+    <h4>Change your name</h4>
+  </div>
+  <div class="row">
+    <div class="col-12 border rounded">
+      <div class="row my-2">
+        <div class="col">
+          <p>If you want to change the name associated with your Qualified Dad customer
+            account, you may do so below. Make sure that you click the Save Changes
+            button when you have finished.</p>
+          <h5>New name</h5>
+          <form method="post">{% csrf_token %}
+            {{ form.non_field_errors }}
+            {{ form.first_name.errors }}
+            <div class="my-2 col-md-6 col-xl-4">
+            {{ form.first_name.label }}
+            {{ form.first_name }}
+            </div>
+            {{ form.last_name.errors }}
+            <div class="my-2 col-md-6 col-xl-4">
+              {{ form.last_name.label }}
+            {{ form.last_name }}
+            <div>
+            <button class="btn btn-success my-2" type="submit">Save changes</button>
+          </form><!-- end change name form -->
+        </div><!-- end col -->
+      </div><!-- end row -->
+    </div><!-- end col bordered -->
+  </div><!-- end row -->
+</div><!-- end container -->
+{% endblock %}

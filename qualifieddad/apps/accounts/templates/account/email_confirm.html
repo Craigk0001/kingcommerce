@@ -1,0 +1,43 @@
+{% extends "core_pages/base.html" %}
+
+{% load staticfiles %}
+
+{% load account %}
+
+{% block nav %}
+{% endblock %}
+
+
+{% block content %}
+<div id="login-security" class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-6 text-center">
+      <a class="navbar-brand" href="{% url 'core_pages:home' %}">
+      <img src='{% static "img/qualified-dad-logo-transparent.png" %}' width="150" height="150" class="d-inline-block align-top" alt="">
+      </a>
+    </div>{# end col #}
+  </div>{# end row #}
+  <div class="row justify-content-md-center">
+    <div class="col-md-6 border rounded">
+      <h1>Confirm e-mail</h1>
+      {% if confirmation %}
+
+      {% user_display confirmation.email_address.user as user_display %}
+
+      <p>Please confirm that <a href="mailto:{{ confirmation.email_address.email }}">{{ confirmation.email_address.email }}</a> is an e-mail address for user {{ user_display }}.</p>
+
+      <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+      {% csrf_token %}
+          <button class="btn btn-primary my-2 btn-block" type="submit">Confirm</button>
+      </form>
+      {% else %}
+      {% url 'account_email' as email_url %}
+      <p>This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.</p>
+      {% endif %}
+    </div>{# end col #}
+  </div>{# end row #}
+</div>{# end container #}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

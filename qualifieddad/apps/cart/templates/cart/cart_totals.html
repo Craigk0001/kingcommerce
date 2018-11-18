@@ -1,0 +1,45 @@
+<div class="container totals">
+  <div class="row justify-content-end totals-item">
+    <div class="col-6 col-md-2">
+      <p class="text-secondary mb-0"><b>Subtotal:</b></p>
+    </div>
+    <div class="col-6 col-md-3">
+      <p class="mb-0 totals-value"><b>$<span id="cart-subtotal">{{ cart.sub_total }}</span></b></p>
+    </div>
+  </div>
+  <div class="row justify-content-end totals-item">
+    <div class="col-6 col-md-2">
+      <p class="text-secondary mb-0"><b>Savings:</b></p>
+    </div>
+    <div class="col-6 col-md-3">
+      <p class="mb-0 totals-value"><b>$<span id="cart-savings">{{ cart.discount_total }}</span></b></p>
+    </div>
+  </div>
+  <div class="row justify-content-end totals-item">
+    <div class="col-6 col-md-2">
+      <p class="text-secondary mb-0"><b>Tax:</b></p>
+    </div>
+    <div class="col-6 col-md-3">
+      <p class="mb-0 totals-value"><b>$<span id="cart-tax">0.00</span></b></p>
+    </div>
+  </div>
+  <div class="row justify-content-end totals-item">
+    <div class="col-6 col-md-2">
+      <p class="text-secondary mb-0"><b>Shipping:</b></p>
+      <hr>
+    </div>
+    <div class="col-6 col-md-3">
+      <p class="mb-0 totals-value"><b>$<span id="cart-shipping">0.00</span></b></p>
+      <hr>
+    </div>
+  </div>
+  <div class="row justify-content-end totals-item">
+    <div class="col-6 col-md-2">
+      <p class="text-secondary mb-0"><b>Total:</b></p>
+    </div>
+    <div class="col-6 col-md-3">
+      <p class="mb-0 totals-value"><b>$<span id="cart-total">{{ cart.grand_total }}</span></b></p>
+    </div>
+  </div>
+  <hr>
+</div>{# end container #}

@@ -1,0 +1,75 @@
+{% extends "core_pages/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container py-2">
+  <h2 class="text-center">Checkout</h2>
+</div>
+<div class="container">
+  <div class="row">
+    <h5>Shipping address</h5>
+  </div>
+  <div class="row">
+    <div class="col-12 border rounded">
+      {% include "addresses/address_form.html" %}
+    </div>{# end col #}
+  </div>{# end row #}
+  <div class="row">
+    <div class="col-md-4 px-0 py-4">
+      <div class="card">
+          <div class="card-header">
+            <div class="row">
+            <div class="col-md-5 col-12 pt-2">
+              <h6 class="m-0"><strong>Payment Details</strong></h6>
+            </div>
+            <div class="col-md-7 col-12 icons">
+              <i class="fab fa-cc-stripe fa-2x" aria-hidden="true"></i>
+              <i class="fab fa-cc-mastercard fa-2x" aria-hidden="true"></i>
+              <i class="fab fa-cc-visa fa-2x" aria-hidden="true"></i>
+              <i class="fab fa-cc-apple-pay fa-2x" aria-hidden="true"></i>
+            </div>
+          </div>
+          </div>
+          <div class="card-body">
+            <form method="post" action="{% url 'account_change_password' %}">
+              {% csrf_token %}
+              <div class="form-group">
+                  <label for="validationTooltipCardNumber"><strong>CARD NUMBER</strong></label>
+                  <div class="input-group">
+                    <input type="text" class="form-control border-right-0" id="validationTooltipCardNumber" placeholder="Card Number">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text rounded-right" id="validationTooltipCardNumber"><i class="fa fa-credit-card"></i></span>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8 col-12">
+                  <div class="form-group">
+                    <label for="exampleInputExpirationDate"><strong>EXPIRATION DATE</strong></label>
+                    <input type="text" class="form-control" id="exampleInputExpirationDate" placeholder="MM / YY">
+                </div>
+                </div>
+                <div class="col-md-4 col-12">
+                  <div class="form-group">
+                    <label for="exampleInputCvcCode"><strong>CVC CODE</strong></label>
+                    <input type="text" class="form-control" id="exampleInputCvcCode" placeholder="CVC">
+                </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputCouponCode"><strong>COUPON CODE</strong></label>
+                <input type="text" class="form-control" id="exampleInputCouponCode" placeholder="Coupon Code">
+              </div>
+              <button class="btn btn-info w-100 pb-2 pt-2">Confirm Payment</button>
+          </form>{# end payment form #}
+        </div>{# end cardbody #}
+      </div>{# end card #}
+    </div>{# end col #}
+  </div>{# end row #}
+</div>{# end container #}
+{% endblock %}
+
+{% block script %}
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript" src='{% static "js/stripe.js" %}'></script>
+{% endblock %}

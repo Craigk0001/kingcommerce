@@ -1,0 +1,29 @@
+{% extends 'core_pages/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container m-0">
+  {% if user.cart.all %}
+    <h2 class="text-center py-3">My Cart</h2>
+    {% for item in cart.cart_selection.all %}
+    {% include 'cart/cart_item.html' %}
+    {% endfor %}
+    {{ request.session }}
+    {{ request.session.the_id }}
+    {% include 'cart/cart_totals.html' %}
+    {% include 'cart/cart_payment_button.html' %}
+  {% include 'cart/shopper_help.html' %}
+  {% else %}
+  {# if customer has no items in cart #}
+  {% include 'cart/cart_empty.html' %}
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block spacer %}
+<div class="row d-block d-md-none p-0 m-0" style="height:125px">
+</div>
+{% endblock %}

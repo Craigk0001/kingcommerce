@@ -1,0 +1,10 @@
+<div class="row">
+  {% for comment in comments %}
+  <section>
+    <blockquote class="blockquote text-left">
+      <p class="mb-0">{{ comment.content }}</p>
+      <footer class="blockquote-footer">Posted by {{ comment.user }} <cite title="Source Title">{{ comment.created|timesince }} ago</cite></footer>
+    </blockquote>
+  </section>
+  {% endfor %}
+</div>{# end row #}

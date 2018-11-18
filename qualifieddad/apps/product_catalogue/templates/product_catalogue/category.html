@@ -1,0 +1,37 @@
+{% extends 'core_pages/base.html' %}
+{% load staticfiles %}
+
+{% block staging %}
+{% include 'product_catalogue/banner.html' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+  <p>{% if category.parent_category.parent_category %}<a href="{% url 'product_catalogue:category' pk=category.parent_category.parent_category.pk %}">{{ category.parent_category.parent_category.name }}</a> | {% endif %}
+    {% if category.parent_category %}<a href="{% url 'product_catalogue:category' pk=category.parent_category.pk %}">{{ category.parent_category.name }}</a> | {% endif %}
+    {{ category.name }}
+  </p>
+</div>
+
+<div class="container">
+  <div class="row">
+    {% for product in category.products.all %}
+      {% include 'product_catalogue/product_menu_item.html' %}
+    {% endfor %}
+  </div>
+  {% for child_category in category.child_category.all %}
+    {% if child_category.products.all %}
+      <div class="row">
+          <h3>{{ child_category }}</h3>
+          <br>
+      </div>
+      <div class="row">
+        {% for product in child_category.products.all %}
+          {% include 'product_catalogue/product_menu_item.html' %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

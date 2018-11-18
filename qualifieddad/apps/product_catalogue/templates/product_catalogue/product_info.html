@@ -1,0 +1,148 @@
+<div class="container">
+  <div class="row d-block d-md-none">
+    <div class="col pl-0">
+      <h5>{{ product_post.title }}</h5>
+    </div>{# end col #}
+  </div>{# end row #}
+
+  {% include 'product_catalogue/product_rating_summary.html' %}
+
+  {% include 'product_catalogue/product_pricing.html' %}
+
+  <div class="row">
+    {% if product_post.description %}
+    {{ product_post.description|safe }}
+    {% endif %}
+  </div>{# end row #}
+  <hr>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.cart.errors }}
+    <select name="cart" required id="id_cart">
+      {% if user.cart.count == 1 %}
+      {% for cart in user.cart.all %}
+      <option selected value="{{ cart.pk }}">{{ cart }}</option>
+      {% endfor %}
+      {% else %}
+      <option selected>Choose...</option>
+      {% for cart in user.cart.all %}
+      <option value="{{ cart.pk }}">{{ cart }}</option>
+      {% endfor %}
+      {% endif %}
+    </select>
+    {{ form.product.errors }}
+
+    <select name="product" required id="id_product">
+      {% if product_post.products.count == 1 %}
+      {% for product in products %}
+      <option selected value="{{ product.pk }}">{{ product.name }}</option>
+      {% endfor %}
+      {% else %}
+      <option selected>Choose...</option>
+      {% for product in products %}
+      <option value="{{ product.pk }}">{{ product.name }}</option>
+      {% endfor %}
+      {% endif %}
+    </select>
+    {{ form.quantity.errors }}
+    <div class="row">
+      {{ form.quantity.errors }}
+      <div class="col">
+        <p id="quantity-text"><b>Quantity</b></p>
+      </div>
+      <div class="col">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quantity">
+              <i class="fas fa-minus"></i>
+            </button>
+          </span>
+          <input type="text" name="quantity" value="1" class="form-control input-number" min="1" max="30" required="" id="id_quantity">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quantity">
+              <i class="fas fa-plus"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <hr>
+    {% for attribute in product_post.attribute.all %}
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">{{ attribute.name }}</label>
+      <select class="form-control" id="exampleFormControlSelect1">
+        {% for value in attribute.attribute_value.all %}
+        <option>{{ value }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% endfor %}
+    {% for attribute in product_post.attribute.all %}
+    <div class="form-group">
+      <div class="row">
+        <h5>{{ attribute.name }}</h5>
+      </div>
+      <div class="row radio-group">
+      {% for value in attribute.attribute_value.all %}
+        <div class="attribute-box radio" data-value="{{ value }}">
+          <p class="attribute-text">{{ value }}</p>
+        </div>
+      {% endfor %}
+        <input type="text" id="radio-value" name="radio-value"/>
+      </div>
+    </div>
+    {% endfor %}
+    <!-- <div class="col-2 text-center p-2">
+      <img id="product-variation" src={{ image.image.image.url }} class="variation-img-cover img-thumbnail" onclick="selectProductImg(this);">
+    </div> -->
+    <div class="row d-none d-sm-none d-md-block">
+      <button type="submit" name="button" class="btn btn-primary btn-block btn-lg"><i class="fas fa-cart-plus fa-fw"></i> Add to cart </button>
+    </div>{# end row #}
+    <div class="row d-block d-md-none fixed-bottom above-tabs">
+      <button type="submit" name="button" class="btn btn-primary btn-block checkout-cta">
+        <div class="row row-eq-height">
+          <div class="col">
+
+          </div>
+          <div class="col">
+            <h5 style="margin-bottom: -.5rem;">Add to cart</h5>
+            <p class="mb-0" style="color:#ffffff70"><small>$10.00 - $12.00 each</small></p>
+          </div>
+          <div class="col text-center">
+            <i class="fas fa-angle-right" style="vertical-align:-.8em"></i>
+          </div>
+        </div>
+      </button>
+    </div>{# end row #}
+    <hr>
+    <div class="row">
+      <div class="col-8">
+        <div class="row">
+          <div class="col">
+            <p class="text-center"><b>Hurry, only 12  left at this price!</b></p>
+          </div>{# end col #}
+        </div>{# end row #}
+        <div class="row">
+          <div class="col">
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100" style="width: 12%"></div>
+            </div>
+          </div>{# end col #}
+        </div>{# end row #}
+      </div>{# end col #}
+      <div class="col-4">
+        <div class="row">
+          <div class="col text-center">
+            <i id="wishlist" class="fas fa-heart fa-2x"></i>
+          </div>{# end col #}
+        </div>{# end row #}
+        <div class="row">
+          <div class="col text-center">
+            <p style="color:Tomato"><small>WISHLIST</small></p>
+          </div>{# end col #}
+        </div>{# end row #}
+      </div>{# end col #}
+    </div>{# end row #}
+  </form>
+</div>{# end container #}

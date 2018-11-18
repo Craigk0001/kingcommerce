@@ -1,0 +1,33 @@
+{% extends "core_pages/base.html" %}
+{% load staticfiles %}
+
+{% block nav %}
+{% endblock %}
+
+{% block content %}
+<div id="login-security" class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-6 text-center">
+      <a class="navbar-brand" href="{% url 'core_pages:home' %}">
+      <img src='{% static "img/qualified-dad-logo-transparent.png" %}' width="150" height="150" class="d-inline-block align-top" alt="">
+      </a>
+    </div>{# end col #}
+  </div>{# end row #}
+  <div class="row justify-content-md-center">
+    <div class="col-md-6 border rounded">
+      <h1>Sign Out</h1>
+      <p>We know you don't really want to leave, but someone has gotta go be an awesome Dad!</p>
+      <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <button class="btn btn-danger my-2 btn-block" type="submit">That's right! - Sign Out</button>
+      </form>
+    </div>{# end col #}
+  </div>{# end row #}
+</div>{# end container #}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

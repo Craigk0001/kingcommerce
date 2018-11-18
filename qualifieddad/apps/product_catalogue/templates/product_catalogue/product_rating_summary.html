@@ -1,0 +1,46 @@
+{% if product_post.enable_reviews == True and product_post.review.all %}
+<div class="row">
+  <div class="star-rating">
+    <div class="back-stars">
+      <i class="fa fa-star unchecked"></i>
+      <i class="fa fa-star unchecked"></i>
+      <i class="fa fa-star unchecked"></i>
+      <i class="fa fa-star unchecked"></i>
+      <i class="fa fa-star unchecked"></i>
+
+      <div class="front-stars">
+          <i class="fa fa-star checked"></i>
+          {% if product_post.average_star_percentage >= 1.2 and product_post.average_star_percentage <= 1.7 %}
+          <i class="fas fa-star-half checked"></i>
+          {% elif product_post.average_star_percentage > 1.7 %}
+          <i class="fa fa-star checked"></i>
+          {% endif %}
+          {% if product_post.average_star_percentage >= 2.2 and product_post.average_star_percentage <= 2.7 %}
+          <i class="fas fa-star-half checked"></i>
+          {% elif product_post.average_star_percentage > 2.7 %}
+          <i class="fa fa-star checked"></i>
+          {% endif %}
+          {% if product_post.average_star_percentage >= 3.2 and product_post.average_star_percentage <= 3.7 %}
+          <i class="fas fa-star-half checked"></i>
+          {% elif product_post.average_star_percentage > 3.7 %}
+          <i class="fa fa-star checked"></i>
+          {% endif %}
+          {% if product_post.average_star_percentage >= 4.2 and product_post.average_star_percentage <= 4.7 %}
+          <i class="fas fa-star-half checked"></i>
+          {% elif product_post.average_star_percentage > 4.7 %}
+          <i class="fa fa-star checked"></i>
+          {% endif %}
+      </div>{# end front-stars #}
+    </div>{# end back-stars #}
+  </div>{# end star-rating #}
+  {% if product_post.review.count == 1 %}
+  <div class="ml-3">
+    <a href="#review-container">{{ product_post.review.count }} customer review</a>
+  </div>
+  {% elif product_post.review.count > 1 %}
+  <div class="ml-3">
+    <a href="#review-container">{{ product_post.review.count }} customer reviews</a>
+  </div>
+  {% endif %}
+</div>{# end row #}
+{% endif %}

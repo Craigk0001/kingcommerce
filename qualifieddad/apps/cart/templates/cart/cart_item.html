@@ -1,0 +1,65 @@
+{% load staticfiles %}
+<div class="cart-item" data-id="product-id">
+  <div class="row delete-cart-item product-removal" id="delete-button" data-delete-id="{{ item.product.product_post }}">
+      <span href="{% url 'cart:item_delete' pk=item.pk %}"><i class="fas fa-times"></i></span>
+  </div>
+  <div class="row">
+    <div class="col-4 col-md-2 pb-2">
+      <div class="row float-right">
+        {% if item.product.product_image %}
+        <div class="col text-center">
+          <img id="primaryImg" src={{ item.product.product_image.image.url }} class="img-cover img-thumbnail">
+        </div>
+        {% elif item.product.product_post.product_images.all %}
+        {% for image in item.product.product_post.product_images.all %}
+        {% if forloop.first %}
+        <div class="col">
+          <img id="primaryImg" src={{ image.image.url }} class="img-cover img-thumbnail">
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        <div class="col">
+          <img id="primaryImg" src='{% static "img/image-coming-soon.jpg" %}' class="img-cover img-thumbnail">
+        </div>
+        {% endif %}
+      </div>{# end row #}
+    </div>{# end image col #}
+    <div class="col-8 col-md-3">
+      <h6 class="title text-truncate mb-0">{{ item.product.product_post }}</h6>
+      <small class="text-muted">{% if item.product.sale_price %}($<span class="product-price">{{ item.product.sale_price }}</span> each)<span class="product-savings" hidden>{{ item.product.savings }}</span> - <s>(was ${{ item.product.regular_price }} each)</s>{% else %}($<span class="product-price">{{ item.product.regular_price }}</span> each<span class="product-savings" hidden>{{ item.product.savings }}</span>){% endif %}</small>
+      {% for variant in item.product.variant.all %}
+      <small>
+          <p class="d-inline"><b>{{ variant.attribute }}:</b></p>
+          <p class="d-inline">{{ variant.attribute_value }}</p>
+          <br>
+      </small>
+      {% endfor %}
+      <span class="product-shipping">{% if item.product.product_post.shipping_method.type == 'Free Shipping' %}0{% elif item.product.product_post.shipping_method.type == 'Flat Rate' %}{{ item.product.product_post.shipping_method.flat_rate_calculation }}{% endif %}</span>
+      <p><small>Eligible for free shipping</small></p>
+    </div>{# end price col #}
+    <div class="col-6 col-md-2">
+      {{ form.quantity.errors }}
+      <div class="input-group product-quantity">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="{{ item }}">
+            <i class="fas fa-minus"></i>
+          </button>
+        </span>
+        <input type="text" name="{{ item }}" value="{{ item.quantity }}" class="form-control input-number" min="1" max="30" required="" id="id_quantity">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="{{ item }}">
+            <i class="fas fa-plus"></i>
+          </button>
+        </span>
+      </div>
+    </div>{# end quantity col #}
+    <div class="col-6 col-md-3 mb-2">
+      <div class="price-wrap item-totals-value">
+        <p style="color: #007bff; font-size: 18px; font-weight: bold;" class="mb-0">USD $<span class="product-line-price">{{ item.total_cost }}</span></p>
+        <small class="text-muted">{% if item.product.sale_price %}(You saved $<span class="product-line-savings">{{ item.total_savings }}</span>) - <s>(was ${{ item.recommended_retail }})</s>{% else %}<span class="product-line-savings" hidden>{{ item.total_savings }}</span>{% endif %}<span class="product-line-quantity" hidden>{{ item.quantity }}</span></small>
+      </div>
+    </div>{# end total price col #}
+  </div>{# end row #}
+  <hr>
+</div>

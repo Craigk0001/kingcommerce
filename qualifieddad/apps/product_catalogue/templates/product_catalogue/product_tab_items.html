@@ -1,0 +1,145 @@
+{% load staticfiles %}
+<div class="container px-0">
+  <div class="row pt-3 pb-2" style="background:#c7c4d666">
+    <div class="col mx-3">
+      <p><b>
+      </b></p>
+    </div>
+  </div>
+  <div id="accordion">
+    <div class="container pt-2 px-0">
+      <a class="btn btn-link btn-block collapsed" data-toggle="collapse" data-target="#additional" aria-expanded="false" aria-controls="additional">
+        <div class="row">
+          <div id="additional-heading" class="tab-heading pb-2">
+            <i class="fas fa-plus fa-2x d-inline" style="color:blue;"></i>
+            <h4 class="pl-4 d-inline align-top">Additional information</h4>
+          </div>
+        </div>
+      </a>
+      <div id="additional" class="collapse px-3" aria-labelledby="additional-heading" data-parent="#accordion">
+        <div class="row">
+          <div class="col">
+            <p>{{ product_post.additional }}</p>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-0 mb-2">
+      <a class="btn btn-link btn-block collapsed" data-toggle="collapse" data-target="#shipping" aria-expanded="false" aria-controls="shipping">
+        <div class="row">
+          <div id="shipping-heading" class="tab-heading pb-2">
+            <i class="fas fa-plus fa-2x d-inline" style="color:blue;"></i>
+            <h4 class="pl-4 d-inline align-top">Shipping information</h4>
+          </div>
+        </div>
+      </a>
+      <div id="shipping" class="collapse px-3" aria-labelledby="shipping-heading" data-parent="#accordion">
+        <div class="row">
+          <div class="col">
+            <h3 class="text-center">{{ product.shipping_method }}</h3>
+            {% for class in product.shipping_method.shipping_class.all %}
+            <div class="container">
+              <div class="card mb-1" style="max-width: 100%;">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      {{ class.name }}
+                    </div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col text-right">
+                          <b>{% for calculation in class.method_class.all %}${{ calculation.flat_rate_calculation }}{% endfor %}</b>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col text-right">
+                          <small>{{ product.shipping_method.estimated_delivery.days_minimum }} - {{ product.shipping_method.estimated_delivery.days_maximum }} days</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            <p>Please allow 10 days for your order to arrive.  We source products from all over the world to bring you epic offers and the lowest prices. This means sometimes you have to wait a little longer to get your order but it's always worth it! <br>
+            Returns are easy, simply contact us for a returns number and send your item to our returns centre for fast processing. We'll get you a replacement or refund in a snap!</p>
+            <p class="text-center"><small>Qualified Dad offers secure, tracked shipping on all products. If the product is damaged or faulty, return it for a full refund within 30 days.</small></p>
+          </div>{# end col #}
+        </div>{# end row #}
+      </div>{# end accordion #}
+      <hr class="mt-0 mb-2">
+      <a class="btn btn-link btn-block collapsed" data-toggle="collapse" data-target="#quality" aria-expanded="false" aria-controls="quality">
+        <div class="row">
+          <div id="quality-heading" class="tab-heading pb-2">
+            <i class="fas fa-plus fa-2x d-inline" style="color:blue;"></i>
+            <h4 class="pl-4 d-inline align-top">Quality assured</h4>
+          </div>
+        </div>
+      </a>
+      <div id="quality" class="collapse px-3" aria-labelledby="quality-heading" data-parent="#accordion">
+        <div class="row">
+          <div class="col">
+            <div class="container">
+              <div class="row">
+                <div class="col text-center">
+                  <h3>OUR PROMISE TO YOU</h3>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 text-center py-2">
+                  <img src='{% static "img/returns-blue.png" %}' height="100">
+                </div>
+                <div class="col-md-9 py-2">
+                  <h4>No nonsense returns!</h4>
+                  <p>We want you to be completely satisfied with your purchase at Qualified Dad.
+                  Return all products within 30 days of delivery if they are not up to your satisfaction.</p>
+                </div>
+              </div>{# end col #}
+              <div class="row">
+                <div class="col-md-3 text-center py-2 order-md-2">
+                  <img src='{% static "img/security-blue.png" %}' height="100">
+                </div>
+                <div class="col-md-9 text-not-md-right order-md-1 py-2">
+                  <h4>Simple Secure Checkout!</h4>
+                  <p>We like to keep things simple here at Qualified Dad (our kids make life complicated enough).
+                  We worked hard to offer a seemless checkout process whilst utilise the latest in online payment security.
+                  We offer payment options to suit your needs (Mastercard, Visa, Paypal, Stripe & more)</p>
+                </div>
+              </div>{# end col #}
+              <div class="row">
+                <div class="col-md-3 text-center py-2">
+                  <img src='{% static "img/qualified-dad-logo-transparent.png" %}' height="100">
+                </div>
+                <div class="col-md-9 py-2">
+                  <h4>Best prices for a quality purchase!</h4>
+                  <p>We at Qualified Dad search far and wide for the best price on the best Dad products out there.
+                  We speak with the Dad on the street. We find the products that make Dad Life easier so that they can spend more time enjoying life with your kids.</p>
+                </div>{# end col #}
+              </div>{# end row #}
+            </div>{# end container #}
+          </div>{# end col #}
+        </div>{# end row #}
+      </div>{# end accordion #}
+      <hr class="mt-0 mb-2">
+      <a class="btn btn-link btn-block collapsed" data-toggle="collapse" data-target="#qualified" aria-expanded="false" aria-controls="qualified">
+        <div class="row">
+          <div id="qualified-heading" class="tab-heading pb-2">
+            <i class="fas fa-plus fa-2x d-inline" style="color:blue;"></i>
+            <h4 class="pl-4 d-inline align-top">Get qualified</h4>
+          </div>
+        </div>
+      </a>
+      <div id="qualified" class="collapse px-3" aria-labelledby="qualified-heading" data-parent="#accordion">
+        <div class="row">
+          <div class="col">
+            <div class="container text-center">
+              <h4>Become a Qualified Dad</h4>
+              <p>+ Early access to new items, exclusive prieces and limited offers</p>
+            </div>
+          </div>{# end col #}
+        </div>{# end row #}
+      </div>{# end accordion #}
+      <hr class="mt-0 mb-2">
+    </div>
+  </div>
+</div>

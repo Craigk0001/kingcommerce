@@ -1,0 +1,61 @@
+{% extends "core_pages/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+  <div class="row mt-5 mb-3">
+    <div class="col">
+      <a href="{% url 'user_account:profile' %}">Your account</a> | Your addresses
+    </div>
+  </div>
+  <div class="row ml-2">
+    <h4>Your Addresses</h4>
+  </div>
+  {% if not user.user_address.all %}
+  <div class="row ml-2">
+    <h6 class="py-2 text-secondary">(You do not have any saved addresses)</h6>
+  </div>
+  {% endif %}
+  <div class="card mb-4 text-center">
+    <div class="card-body">
+      Add Address <br>
+      <a href="{% url 'address:add_address_to_user' %}"><i class="fas fa-plus fa-3x"></i></a>
+    </div>
+  </div>
+  <div class="card-columns">
+    {% for address in user.user_address.all %}
+    {% if forloop.first %}
+    <div class="card mb-4">
+      <h5 class="card-header">Primary</h5>
+      <div class="card-body">
+        <h6 class="card-title">{{ address.full_name }} | {{ address.user }}</h6>
+        <p class="card-text">{{ address.company_name }} {{ address.address_line1 }}<br>
+          {{ address.city }}, {{ address.state }} {{ address.postcode }}<br>
+          {{ address.country }}<br>
+          <p>Phone number: {{ address.phone }}</p>
+          <br>
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'address:address_update' pk=address.pk %}">Edit</a> | <a href="{% url 'address:address_delete' pk=address.pk %}">Delete</a>
+      </div>
+    </div>
+    {% else %}
+    <div class="card mb-4">
+      <div class="card-body">
+        <br><hr>
+        <h6 class="card-title">{{ address.full_name }} | {{ address.user }}</h6>
+        <p class="card-text">{{ address.company_name }} {{ address.address_line1 }}<br>
+          {{ address.city }}, {{ address.state }} {{ address.postcode }}<br>
+          {{ address.country }}<br>
+          <p>Phone number: {{ address.phone }}</p>
+          <br>
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'address:address_update' pk=address.pk %}">Edit</a> | <a href="{% url 'address:address_delete' pk=address.pk %}">Delete</a> | <a href="#">Set Primary</a>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

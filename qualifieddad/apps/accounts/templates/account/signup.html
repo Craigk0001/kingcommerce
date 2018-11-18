@@ -1,0 +1,36 @@
+{% extends "core_pages/base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block nav %}
+{% endblock %}
+
+{% block content %}
+<div id="login-security" class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-6 text-center">
+      <a class="navbar-brand" href="{% url 'core_pages:home' %}">
+      <img src='{% static "img/qualified-dad-logo-transparent.png" %}' width="150" height="150" class="d-inline-block align-top" alt="">
+      </a>
+    </div>{# end col #}
+  </div>{# end row #}
+  <div class="row justify-content-md-center">
+    <div class="col-md-6 border rounded">
+      <h1>Create account</h1>
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button class="btn btn-primary my-2 btn-block" type="submit">Create account</button>
+      </form>{# end signup form #}
+      <br>
+      <p>Already have an account? Then please <a href="{{ login_url }}">sign in</a>.</p>
+    </div>{# end col #}
+  </div>{# end row #}
+</div>{# end container #}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% load staticfiles %}
+<div class="container-fluid navbar-mobile-home fixed-bottom">
+  <div class="row pt-2">
+    <div class="col{% if request.path == '/' %} current-page{% endif %}">
+      <a class="nav-link" href="{% url 'core_pages:home' %}">
+      <i class="fas fa-home fa-2x"></i>
+      <p>Home</p><span class="sr-only">Home{% if request.path == '/' %} (current){% endif %}</span>
+      </a>
+    </div>{# end col #}
+    <div class="col{% if request.path == 'category' %} current-page{% endif %}">
+      <a class="nav-link" href="{% url 'product_catalogue:category' pk=1 %}">
+      <i class="fas fa-store fa-2x"></i>
+      <p>Shop</p><span class="sr-only">Shop{% if request.path == 'category' %} (current){% endif %}</span>
+      </a>
+    </div>{# end col #}
+    <div class="col{% if '/cart/' in request.path %} current-page{% endif %}">
+      <a class="nav-link" href="{% url 'cart:cart' %}">
+        <div class="fa-2x">
+          <span class="fa-layers fa-fw">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="fa-layers-counter fa-lg" style="background:red">4</span>
+          </span>
+        </div>
+        <p>Cart</p><span class="sr-only">Cart
+          {% if '/cart/' in request.path %} (current){% endif %}</span>
+      </a>
+    </div>{# end col #}
+    <div class="col{% if '/account/' in request.path %} current-page{% endif %}">
+      <a class="nav-link" href="{% url 'user_account:profile' %}">
+        <i class="fas fa-user fa-2x"></i>
+        <p>Account</p><span class="sr-only">Account
+          {% if '/account/' in request.path %} (current){% endif %}</span>
+      </a>
+    </div>{# end col #}
+  </div>{# end row #}
+</div>{# end container #}

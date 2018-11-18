@@ -1,0 +1,259 @@
+  <div class="container">
+    <div class="row pt-3">
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <span><h3 class="text-center"><b>Customer Reviews</b></h3></span>
+            <div class="star-rating">
+              <div class="back-stars">
+                <i class="fa fa-star unchecked"></i>
+                <i class="fa fa-star unchecked"></i>
+                <i class="fa fa-star unchecked"></i>
+                <i class="fa fa-star unchecked"></i>
+                <i class="fa fa-star unchecked"></i>
+
+                <div class="front-stars">
+                    <i class="fa fa-star checked"></i>
+                    {% if product_post.average_star_percentage >= 1.2 and product_post.average_star_percentage <= 1.7 %}
+                    <i class="fas fa-star-half checked"></i>
+                    {% elif product_post.average_star_percentage > 1.7 %}
+                    <i class="fa fa-star checked"></i>
+                    {% endif %}
+                    {% if product_post.average_star_percentage >= 2.2 and product_post.average_star_percentage <= 2.7 %}
+                    <i class="fas fa-star-half checked"></i>
+                    {% elif product_post.average_star_percentage > 2.7 %}
+                    <i class="fa fa-star checked"></i>
+                    {% endif %}
+                    {% if product_post.average_star_percentage >= 3.2 and product_post.average_star_percentage <= 3.7 %}
+                    <i class="fas fa-star-half checked"></i>
+                    {% elif product_post.average_star_percentage > 3.7 %}
+                    <i class="fa fa-star checked"></i>
+                    {% endif %}
+                    {% if product_post.average_star_percentage >= 4.2 and product_post.average_star_percentage <= 4.7 %}
+                    <i class="fas fa-star-half checked"></i>
+                    {% elif product_post.average_star_percentage > 4.7 %}
+                    <i class="fa fa-star checked"></i>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>{{ product_post.average_star_percentage|floatformat:"1" }} average based on {{ product_post.review.count }}{% if product_post.review.count >= 2 %} reviews.{% else %} review.{% endif %}</p>
+        <hr style="border:3px solid #f1f1f1">
+        <div class="row">
+          <div class="col">
+            <div class="container">
+              <div class="row">
+                <div class="col-5 col-lg-2 p-0">
+                  <div class="d-flex float-right">
+                    <a {% if product_post.five_star %}id="star-link"{% endif %} href="?star_rating=5#review-container" style="text-decoration: none;">
+                    <div style="white-space: nowrap;">
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{ product_post.five_percentage }}%" aria-valuenow="{{ product_post.five_percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <div class="col-1 col-lg-4 p-0">
+                  {% if product_post.five_star %}
+                  <a href="?star_rating=5#review-container">{{ product_post.five_star }}
+                  </a>
+                  {% else %}
+                  <div>{{ product_post.five_star }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 col-lg-2 p-0">
+                  <div class="d-flex float-right">
+                    <a {% if product_post.four_star %}id="star-link"{% endif %} href="?star_rating=4#review-container" style="text-decoration: none;">
+                    <div style="white-space: nowrap;">
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star unchecked"></span>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{ product_post.four_percentage }}%" aria-valuenow="{{ product_post.four_percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <div class="col-1 col-lg-4 p-0">
+                  {% if product_post.four_star %}
+                  <a href="?star_rating=4#review-container">{{ product_post.four_star }}
+                  </a>
+                  {% else %}
+                  <div>{{ product_post.four_star }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 col-lg-2 p-0">
+                  <div class="d-flex float-right">
+                    <a {% if product_post.three_star %}id="star-link"{% endif %} href="?star_rating=3#review-container" style="text-decoration: none;">
+                    <div style="white-space: nowrap;">
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star unchecked"></span>
+                      <span class="fa fa-star unchecked"></span>
+                    </div>
+                  </a>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{ product_post.three_percentage }}%" aria-valuenow="{{ product_post.three_percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <div class="col-1 col-lg-4 p-0">
+                  {% if product_post.three_star %}
+                  <a href="?star_rating=3#review-container">{{ product_post.three_star }}
+                  </a>
+                  {% else %}
+                  <div>{{ product_post.three_star }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 col-lg-2 p-0">
+                  <a {% if product_post.two_star %}id="star-link"{% endif %} href="?star_rating=2#review-container" style="text-decoration: none;">
+                  <div class="d-flex float-right">
+                    <div style="white-space: nowrap;">
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star unchecked"></span>
+                      <span class="fa fa-star unchecked"></span>
+                      <span class="fa fa-star unchecked"></span>
+                    </div>
+                  </div>
+                  </a>
+                </div>
+                <div class="col-6">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{ product_post.two_percentage }}%" aria-valuenow="{{ product_post.two_percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <div class="col-1 col-lg-4 p-0">
+                  {% if product_post.two_star %}
+                  <a href="?star_rating=2#review-container">{{ product_post.two_star }}
+                  </a>
+                  {% else %}
+                  <div>{{ product_post.two_star }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 col-lg-2 p-0">
+                  <div class="d-flex float-right">
+                    <a {% if product_post.one_star %}id="star-link"{% endif %} href="?star_rating=1#review-container" style="text-decoration: none;">
+                    <div style="white-space: nowrap;">
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star unchecked"></span>
+                      <span class="fa fa-star unchecked"></span>
+                      <span class="fa fa-star unchecked"></span>
+                      <span class="fa fa-star unchecked"></span>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{ product_post.one_percentage }}%" aria-valuenow="{{ product_post.one_percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <div class="col-1 col-lg-4 p-0">
+                  {% if product_post.one_star %}
+                  <a href="?star_rating=1#review-container">{{ product_post.one_star }}
+                  </a>
+                  {% else %}
+                  <div>{{ product_post.one_star }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 offset-4 offset-lg-2">
+                  <p class="text-center">See all reviews</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        {% include 'product_catalogue/review_pagination.html' %}
+        {% for review in reviews %}
+        <div class="card" style="border: none;">
+          <div class="card-body">
+            <div class="mb-2 d-flex">
+              <div>
+                <i class="fas fa-user-circle fa-2x" style="color:#bdbdbd"></i>
+              </div>
+              <div class="ml-3 d-flex align-items-center">
+                <p>{{ review.user }}</p>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div style="white-space: nowrap;">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star {% if review.rating >= 2 %}checked{% else %}unchecked{% endif %}"></span>
+                <span class="fa fa-star {% if review.rating >= 3 %}checked{% else %}unchecked{% endif %}"></span>
+                <span class="fa fa-star {% if review.rating >= 4 %}checked{% else %}unchecked{% endif %}"></span>
+                <span class="fa fa-star {% if review.rating >= 5 %}checked{% else %}unchecked{% endif %}"></span>
+              </div>
+              <div class="pl-3">
+                  <h5 class="card-title">{{ review.content }}</h5>
+              </div>
+            </div>
+            <cite title="Source Title">{{ review.created|timesince }} ago</cite>
+            <div class="d-flex">
+              <p><small>{{ product_post.title }} |</small></p>{% if review.verified %}
+              <p class="text-success pl-2"><small>Verified Purchase</small></p>{% endif %}
+            </div>
+            {% if review.detail %}
+            <p class="card-text">{{ review.detail }}</p>
+            {% endif %}
+            {% if review.helpfulness_count == 1 %}
+            <p>{{ review.helpfulness_count }} person found this helpful</p>
+            {% elif review.helpfulness_count > 1 %}
+            <p>{{ review.helpfulness_count }} people found this helpful</p>
+            {% else %}
+            <p>Did you find this review helpful?</p>
+            {% endif %}
+            <div class="row">
+              <div class="col-md-4 mb-2">
+                <div class="d-flex">
+                  <div>
+                    <a href="#" class="btn btn-light">Helpful</a>
+                    <a href="#" class="btn btn-light">Not Helpful</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <a class="text-right" href="#">Comment</a> | <a class="ml-auto" href="#">Report Abuse</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% include 'product_catalogue/review_pagination.html' %}
+      </div>
+    </div>
+    <div class="row">
+      <form class="" action="index.html" method="post">
+
+      </form>
+    </div>
+  </div>

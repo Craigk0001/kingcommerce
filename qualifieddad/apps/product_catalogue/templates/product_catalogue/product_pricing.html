@@ -1,0 +1,51 @@
+{% if product_post.number_of_products == 1 %}
+  {% for product in products %}
+    {% if product.discount %}
+      <div class="row">
+        <h5 class="text-muted"><s>${{ product.regular_price|floatformat:2 }}</s></h5>
+      </div>{# end row #}
+      <div class="row">
+        <h3 class="text-danger">${{ product.sale_price|floatformat:2 }}</h3>
+        <p><b>& FREE delivery</b> in the U.S.A. <a href="#"> Delivery Details</a></p>
+      </div>{# end row #}
+      <div class="row">
+        <p class="text-danger"><small>You save ${{ product.savings|floatformat:2 }} ({{ product.discount|floatformat:"0" }}% OFF)</small></p>
+      </div>{# end row #}
+    {% else %}
+      <div class="row">
+        <h3 class="text-danger">${{ product.regular_price|floatformat:2 }}</h3>
+        <p><b>& FREE delivery</b> in the U.S.A. <a href="#"> Delivery Details</a></p>
+      </div>{# end row #}
+    {% endif %}
+  {% endfor %}
+{% elif product_post.number_of_products > 1 %}
+    {% if product_post.max_savings == 0 %}
+    <div class="row">
+      {% if product_post.regular_price_range.min != product_post.regular_price_range.max %}
+      <h3 class="text-danger">${{ product_post.regular_price_range.min|floatformat:2 }} - ${{ product_post.regular_price_range.max|floatformat:2 }}
+      {% else %}
+      <h3 class="text-danger">${{ product_post.regular_price_range.min|floatformat:2 }}
+      {% endif %}
+      </h3><p><b>& FREE delivery</b> in the U.S.A. <a href="#"> Delivery Details</a></p>
+    </div>{# end row #}
+    {% elif product_post.max_savings > 0 %}
+    <div class="row">
+      {% if product_post.regular_price_range.min != product_post.regular_price_range.max %}
+      <h5 class="text-muted"><s>${{ product_post.regular_price_range.min|floatformat:2 }} - ${{ product_post.regular_price_range.max|floatformat:2 }}</s></h5>
+      {% else %}
+      <h5 class="text-muted"><s>${{ product_post.regular_price_range.min|floatformat:2 }}</s></h5>
+      {% endif %}
+    </div>{# end row #}
+    <div class="row">
+      {% if product_post.sale_price_range.min != product_post.sale_price_range.max %}
+      <h3 class="text-danger">${{ product_post.sale_price_range.min|floatformat:2 }} - ${{ product_post.sale_price_range.max|floatformat:2 }}
+      {% else %}
+      <h3 class="text-danger">${{ product_post.sale_price_range.min|floatformat:2 }}
+      {% endif %}
+      </h3><p><b>& FREE delivery</b> in the U.S.A. <a href="#"> Delivery Details</a></p>
+    </div>{# end row #}
+    <div class="row">
+      <p class="text-danger"><small>You save up to ${{ product_post.max_savings|floatformat:2 }} ({{ product_post.max_discount|floatformat:"0" }}% OFF)</small></p>
+    </div>{# end row #}
+  {% endif %}
+{% endif %}

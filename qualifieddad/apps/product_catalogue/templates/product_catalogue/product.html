@@ -1,0 +1,41 @@
+{% extends "core_pages/base.html" %}
+{% load staticfiles %}
+
+{% block script %}
+{% endblock %}
+
+{% block jquery %}
+{% endblock %}
+
+{% block content %}
+<div class="container" id="product_info">
+  <div class="row d-none d-md-block">
+    <h1 class="text-center">{{ product_post.title }}</h1>
+  </div>{# end row #}
+  <div class="row">
+    <div class="col-md-5">
+      <!-- The expanding image container -->
+      {% include 'product_catalogue/product_images.html' %}
+      {% include 'product_catalogue/product_sharing.html' %}
+		</div>{# end col #}
+    <div class="col-md-7">
+      {% include 'product_catalogue/product_info.html' %}
+    </div>{# end col #}
+  </div>{# end row #}
+  <br>
+  {% include 'product_catalogue/product_tab_items.html' %}
+  {% if product_post.enable_reviews == True and product_post.review.all %}
+  <div class="row" id="review-container">
+  {% include 'product_catalogue/reviews.html' %}
+  </div>{# end row #}
+  {% endif %}
+  {% include 'product_catalogue/product_slider.html' %}
+  {% include 'product_catalogue/comments.html' %}
+</div>{# end container #}
+<br>
+{% endblock %}
+
+{% block spacer %}
+<div class="row d-block d-md-none p-0 m-0" style="height:125px">
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<div class="row pb-3">
+  <div class="col px-0" onload="onloadProductImg();">
+    <!-- Expanded image -->
+    <img id="expandedImg" class="primary-img-cover">
+  </div>
+</div>
+<!-- The grid: four columns -->
+<div class="container">
+  <div class="row">
+    {% if product_post.product_images.all %}
+    {% for image in product_post.product_images.all %}
+    <div class="col-4 text-center">
+      <img id="primaryImg" src={{ image.image.url }} class="img-cover img-thumbnail" onclick="selectProductImg(this);">
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="col-4">
+      <img id="primaryImg" src='{% static "img/image-coming-soon.jpg" %}' class="img-cover img-thumbnail" onclick="selectProductImg(this);">
+    </div>
+    {% endif %}
+  </div>{# end row #}
+</div>{# end container #}

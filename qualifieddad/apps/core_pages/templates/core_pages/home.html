@@ -1,0 +1,40 @@
+{% extends 'core_pages/base.html' %}
+{% load staticfiles %}
+
+{% block staging %}
+{% include 'core_pages/jumbotron.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid bg-primary" id="trust-bar">
+  <div class="row">
+    <div class="col text-center col-4">
+      <img src='{% static "img/security.png" %}' width="100%" style="max-width:150px">
+    </div>
+    <div class="col text-center col-4">
+      <img src='{% static "img/free-shipping.png" %}' width="100%" max-width="100px" style="max-width:150px">
+    </div>
+    <div class="col text-center col-4">
+      <img src='{% static "img/returns.png" %}' width="100%" max-width="100px" style="max-width:150px">
+    </div>
+  </div>
+</div>
+{% include 'core_pages/special_offers.html' %}
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <h2 class="text-center py-5">LATEST PRODUCTS</h2>
+    </div>
+  </div>
+  <div class="row">
+    {% for product_post in product_posts %}
+    {% if product_post.products.all and product_post.visibility == 'Public' and product_post.status == 'Active' %}
+    {% include 'product_catalogue/product_menu_item.html' %}
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block two %}
+{% endblock %}

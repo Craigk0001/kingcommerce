@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<div class="row justify-content-end">
+  <div class="col-md-5">
+    <div class="row d-none d-sm-none d-md-block">
+      <button type="button" class="btn btn-primary btn-block btn-lg" name="button">
+        Proceed to payment ><br>
+      </button>
+      <img class="img-fluid py-2" src='{% static "img/payment-4.png" %}' height="100">
+    </div>
+  </div>
+</div>{# end row #}
+<div class="row d-block d-md-none fixed-bottom above-tabs">
+  <button type="button" class="btn btn-primary btn-block btn-lg checkout-cta" name="button">
+    <div class="row row-eq-height">
+      <div class="col">
+
+      </div>
+      <div class="col">
+        <h5 style="margin-bottom: -.5rem;">Proceed to payment</h5>
+        <p class="mb-0 totals-value"><small style="color:#ffffff6b">Total: $<span id="cart-total-b">{{ cart.grand_total }}</span> (<span id="cart-quantity">{{ cart.item_count }}</span> {% if cart.item_count == 1 %}item){% elif cart.item_count > 1 %}items){% else %}){% endif %}</small></p>
+      </div>
+      <div class="col text-center">
+        <i class="fas fa-angle-right" style="vertical-align:-.6em"></i>
+      </div>
+    </div>
+  </button>
+</div>
+<br>
+<div class="row py-2 row d-block d-md-none">
+  <div class="col">
+    <img class="img-fluid" src='{% static "img/payment-4.png" %}' height="100">
+  </div>
+</div>

@@ -1,0 +1,79 @@
+{% extends "core_pages/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div id="login-security" class="container">
+  <div class="row mt-5 mb-3">
+    <div class="col">
+      <a href="{% url 'user_account:profile' %}">Your account</a> | Login & security
+    </div>
+  </div>
+  <div class="row ml-2">
+    <h4>Your login & security</h4>
+  </div>
+  <div class="row">
+    <div class="col-12 border rounded">
+      <div class="row my-2">
+        <div class="col-9">
+          <h5>Name:</h5>
+          <p class="d-inline">{{ user.first_name }}</p>
+          <p class="d-inline">{{ user.last_name }}</p>
+        </div><!-- end col -->
+        <div class="col-3 d-flex align-items-center justify-content-end">
+          <a href="{% url 'user_account:change_name' %}" class="btn btn-info my-2 float-right" role="button" aria-pressed="profile">Edit</a>
+        </div><!-- end col -->
+      </div><!-- end row -->
+    </div><!-- end col bordered -->
+    <div class="col-12 border rounded">
+      <div class="row my-2">
+        <div class="col-9">
+          <h5>Email:</h5>
+          {% for emailaddress in user.emailaddress_set.all %}
+          <div class="">
+            <p class="d-inline">{{ emailaddress.email }}</p>
+            {% if emailaddress.verified %}
+            <p class="verified d-inline">Verified</p>
+            {% else %}
+            <p class="unverified d-inline">Unverified</p>
+            {% endif %}
+            {% if emailaddress.primary %}<p class="primary d-inline">Primary</p>{% endif %}
+          </div>
+          {% endfor %}
+        </div><!-- end col -->
+        <div class="col-3 d-flex align-items-center justify-content-end">
+          <a href="{% url 'account_email' %}" class="btn btn-info my-2 float-right" role="button" aria-pressed="profile">Edit</a>
+        </div><!-- end col -->
+      </div><!-- end row -->
+    </div><!-- end col bordered -->
+    <div class="col-12 border rounded">
+      <div class="row my-2">
+        <div class="col-9">
+          <h5>Mobile phone number:</h5>
+          {% for phone in user.user_phone.all %}
+          <p class="d-inline">{{ phone.phone_number }}</p>
+          {% endfor %}
+        </div><!-- end col -->
+        <div class="col-3 d-flex align-items-center justify-content-end">
+          <button type="button" class="btn btn-info">Edit</button>
+        </div><!-- end col -->
+      </div><!-- end row -->
+    </div><!-- end col bordered -->
+    <div class="col-12 border rounded">
+      <div class="row my-2">
+        <div class="col-9">
+          <h5>Password:</h5>
+          <p>*********</p>
+        </div><!-- end col -->
+        <div class="col-3 d-flex align-items-center justify-content-end">
+          <a href="{% url 'account_change_password' %}" class="btn btn-info my-2 float-right" role="button" aria-pressed="profile">Edit</a>
+        </div><!-- end col -->
+      </div><!-- end row -->
+    </div><!-- end col bordered -->
+  </div><!-- end row -->
+  <div class="row">
+    <div class="col">
+      <a href="{% url 'user_account:profile' %}" class="btn btn-success my-2 float-right" role="button" aria-pressed="profile">Done</a>
+    </div>
+  </div><!-- end row -->
+</div><!-- end container -->
+{% endblock %}

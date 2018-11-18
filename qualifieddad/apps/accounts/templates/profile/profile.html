@@ -1,0 +1,23 @@
+{% extends "core_pages/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container p-4">
+  <br>
+  <br>
+  <div class="row">
+    <div class="col">
+      <h2>Your Account</h2>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-12">
+      {% include 'profile/profile_options.html' %}
+    </div><!-- end col -->
+  </div>{# end row #}
+</div>{# end container #}
+<br>
+{% include 'core_pages/ad-trio.html' %}
+<br>
+{% endblock %}<!-- end block content -->

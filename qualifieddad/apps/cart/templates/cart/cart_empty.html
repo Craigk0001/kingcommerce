@@ -1,0 +1,58 @@
+<br><br><br><br>
+<div class="container empty-cart">
+  <div class="row text-center">
+    <div class="col">
+      <h1 class="empty-cart-head">YOUR CART IS EMPTY</h1>
+      <span class="fa-stack fa-7x">
+        <i class="fas fa-cart-plus fa-stack-1x"></i>
+        <i class="fas fa-circle-notch fa-spin fa-stack-2x" style="color:#0600fb33"></i>
+      </span>
+      <h3>ADD SOME STUFF!</h3>
+      <p><small>(We won't tell)</small></p>
+      <p>{{ request.user }} </p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>Add from your wishlist</h3>
+    </div>
+  </div>
+  <div class="row">
+    {% for product_post in product_posts %}
+    {% if product_post.products.all and product_post.visibility == 'Public' and product_post.status == 'Active' %}
+    {% include 'product_catalogue/product_menu_item.html' %}
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>Add from best sellers</h3>
+    </div>
+  </div>
+  <div class="row">
+    {% for product_post in product_posts %}
+    {% if product_post.products.all and product_post.visibility == 'Public' and product_post.status == 'Active' %}
+    {% include 'product_catalogue/product_menu_item.html' %}
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>Recommended for you</h3>
+    </div>
+  </div>
+  <div class="row">
+    {% for product_post in product_posts %}
+    {% if product_post.products.all and product_post.visibility == 'Public' and product_post.status == 'Active' %}
+    {% include 'product_catalogue/product_menu_item.html' %}
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<!--container end.//-->
