@@ -1,9 +1,10 @@
 from qualifieddad.settings.base import *
 
 # Override base.py settings here
-DEBUG=False
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS =  ['kingcommerce.herokuapp.com', 'https://git.heroku.com/kingcommerce.git']
+
 
 CORS_REPLACE_HTTPS_REFERER      = True
 HOST_SCHEME                     = "https://"
